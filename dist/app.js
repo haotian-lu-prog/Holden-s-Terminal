@@ -7,6 +7,7 @@ import { renderPortfolio } from "./pages/portfolio.js";
 import { renderResearch } from "./pages/research.js";
 import { renderSubscriptions } from "./pages/subscriptions.js";
 const STORAGE_KEY = "holdens-terminal:v2";
+const GITHUB_PAGES_BASE_PATH = "/Holden-s-Terminal";
 const navItems = [
     {
         id: "dashboard",
@@ -81,8 +82,24 @@ function loadState() {
 function saveState() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
+function basePath() {
+    const pathname = window.location.pathname;
+    return pathname === GITHUB_PAGES_BASE_PATH || pathname.startsWith(`${GITHUB_PAGES_BASE_PATH}/`)
+        ? GITHUB_PAGES_BASE_PATH
+        : "";
+}
+function routePath() {
+    const base = basePath();
+    const pathname = window.location.pathname;
+    return base && (pathname === base || pathname.startsWith(`${base}/`))
+        ? pathname.slice(base.length) || "/"
+        : pathname;
+}
+function pageHref(page) {
+    return `${basePath()}/${page}`;
+}
 function currentPage() {
-    const slug = window.location.pathname.replace(/^\/+|\/+$/g, "") || "dashboard";
+    const slug = routePath().replace(/^\/+|\/+$/g, "") || "dashboard";
     return navItems.some((item) => item.id === slug) ? slug : "dashboard";
 }
 function countFor(page) {
@@ -111,7 +128,7 @@ function render() {
         <nav class="nav" aria-label="Primary pages">
           ${navItems
         .map((item, index) => `
-                <a class="${item.id === page ? "active" : ""}" href="/${item.id}" data-nav="${item.id}">
+                <a class="${item.id === page ? "active" : ""}" href="${pageHref(item.id)}" data-nav="${item.id}">
                   <b>${String(index + 1).padStart(2, "0")}</b>
                   <span>${escapeHtml(item.label)}</span>
                   <small>${countFor(item.id)}</small>
