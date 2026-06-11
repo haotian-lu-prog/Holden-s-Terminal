@@ -6,7 +6,28 @@ A local-first personal investment operating system. It is structured around:
 
 The app is intentionally not a budgeting app or bank-sync product. It focuses on portfolio state, exposure quality, thesis quality, decision hygiene, macro context, and tool-cost discipline.
 
-## Run
+## Setup
+
+Install dependencies after cloning the repository. Do not commit `node_modules`;
+it is generated locally from `package-lock.json`.
+
+```bash
+npm install
+```
+
+Build the TypeScript sources:
+
+```bash
+npm run build
+```
+
+Start the local server:
+
+```bash
+npm start
+```
+
+For development, build and start in one command:
 
 ```bash
 npm run dev

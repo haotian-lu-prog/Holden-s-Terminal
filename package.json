@@ -5,6 +5,7 @@
   "description": "A local-first cognitive terminal for investment research, decisions, and review loops.",
   "type": "module",
   "scripts": {
+    "start": "node server.mjs",
     "dev": "npm run build && node server.mjs",
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
