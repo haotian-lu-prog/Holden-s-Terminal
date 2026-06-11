@@ -1,0 +1,16 @@
+{
+  "name": "holdens-terminal",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A local-first cognitive terminal for investment research, decisions, and review loops.",
+  "type": "module",
+  "scripts": {
+    "dev": "npm run build && node server.mjs",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "check": "node --check server.mjs && npm run typecheck && npm run build"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}
